@@ -1,11 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Planificador de Tareas Ágil</title>
 </head>
 <body>
-    
+    <!-- Barra de navegación principal -->
+    <nav>
+        <h1>Mi Planificador Ágil</h1>
+    </nav>
+
+    <main>
+        <!-- 1. SECCIÓN DEL FORMULARIO -->
+        <section class="seccion-formulario">
+            <h2>Crear Nueva Tarea</h2>
+            <form id="formulario-tarea">
+                <div>
+                    <label for="nombre">Nombre de la tarea:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Crear base de datos" required>
+                </div>
+                <div>
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" placeholder="Detalles..." required></textarea>
+                </div>
+                <div>
+                    <label for="asignado">Asignado a (Responsable):</label>
+                    <input type="text" id="asignado" name="asignado" placeholder="Nombre" required>
+                </div>
+                <div>
+                    <label for="fecha">Fecha de cumplimiento:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                <div>
+                    <label for="estado">Estado:</label>
+                    <select id="estado" name="estado">
+                        <option value="planificacion">En planificación</option>
+                        <option value="proceso">En proceso</option>
+                        <option value="terminado">Terminado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="prioridad">Prioridad:</label>
+                    <select id="prioridad" name="prioridad">
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </div>
+                <button type="submit">Guardar Tarea</button>
+            </form>
+        </section>
+
+        <hr> <!-- Separador temporal -->
+
+        <!-- 2. SECCIÓN DEL TABLERO KANBAN (Estilo Trello) -->
+        <section class="tablero-trello">
+            
+            <!-- Columna 1 -->
+            <article class="columna" id="col-planificacion">
+                <h2>En Planificación</h2>
+                <!-- Las tareas en planificación se insertarán aquí -->
+            </article>
+
+            <!-- Columna 2 -->
+            <article class="columna" id="col-proceso">
+                <h2>En Proceso</h2>
+                <!-- Las tareas en proceso se insertarán aquí -->
+            </article>
+
+            <!-- Columna 3 -->
+            <article class="columna" id="col-terminado">
+                <h2>Terminado</h2>
+                <!-- Las tareas terminadas se insertarán aquí -->
+            </article>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
