@@ -1,4 +1,19 @@
-/* Estilos generales y reseteo básico */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap');
+
+:root {
+    --bg-arena: #FDFBF7;         /* Fondo general neutro */
+    --texto-marron: #3E2723;     /* Texto y acentos */
+    --verde-salvia: #87A96B;     /* Acción principal / Éxito */
+    --verde-hover: #75955a;      /* Verde salvia oscuro para hover */
+    --terracota: #E2725B;        /* Acción secundaria / Eliminar */
+    --terracota-hover: #c65e49;  /* Terracota oscuro para hover */
+    --bg-tarjeta: #FFFFFF;       /* Fondo puro para tarjetas */
+    --borde-claro: #e5e0d8;      /* Bordes sutiles adaptados al arena */
+    
+    --fuente-titulos: 'Poppins', sans-serif;
+    --fuente-cuerpo: 'Inter', sans-serif;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,71 +21,202 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    font-family: var(--fuente-cuerpo);
+    background-color: var(--bg-arena);
+    color: var(--texto-marron);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
-/* Contenedor principal estilo tarjeta (Card) */
-.contenedor-principal {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fuente-titulos);
+    color: var(--texto-marron);
+}
+
+nav {
     width: 100%;
-    max-width: 500px; /* Mantiene el formulario compacto y legible */
+    max-width: 1200px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-h1 {
+main {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.seccion-formulario {
+    background-color: var(--bg-tarjeta);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(62, 39, 35, 0.05); /* Sombra basada en marrón oscuro */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 700px;
+}
+
+.seccion-formulario h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #2c3e50;
 }
 
-/* Estructura flexible de cada campo del formulario */
-.grupo-formulario {
-    margin-bottom: 15px;
+/* Formulario responsivo (Grid) */
+#formulario-tarea {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+#formulario-tarea div:nth-child(2),
+#formulario-tarea button {
+    grid-column: 1 / -1; 
+}
+
+#formulario-tarea div {
     display: flex;
     flex-direction: column;
 }
 
 label {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 13px;
+    color: var(--texto-marron);
+    opacity: 0.85; 
 }
 
-/* Estilo unificado para los campos de entrada */
 input, textarea, select {
+    font-family: var(--fuente-cuerpo);
+    color: var(--texto-marron);
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    border: 1px solid var(--borde-claro);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--bg-tarjeta);
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #3498db;
+    border-color: var(--verde-salvia);
+    box-shadow: 0 0 0 2px rgba(135, 169, 107, 0.2);
     outline: none;
 }
 
-/* Estilo del botón */
-.boton-guardar {
-    width: 100%;
-    padding: 12px;
-    background-color: #2ecc71;
+button[type="submit"] {
+    font-family: var(--fuente-cuerpo);
+    padding: 14px;
+    background-color: var(--verde-salvia);
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
-.boton-guardar:hover {
-    background-color: #27ae60;
+button[type="submit"]:hover {
+    background-color: var(--verde-hover);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--borde-claro);
+    margin: 10px 0;
+}
+
+.tablero-trello {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.columna {
+    flex: 1;
+    background-color: var(--bg-tarjeta);
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 400px;
+    box-shadow: 0 4px 12px rgba(62, 39, 35, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.columna h2 {
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--bg-arena);
+    margin-bottom: 5px;
+}
+
+#col-planificacion h2 { color: var(--texto-marron); opacity: 0.7; }
+#col-proceso h2 { color: var(--terracota); }
+#col-terminado h2 { color: var(--verde-salvia); }
+
+.tablero-trello article {
+    background-color: var(--bg-tarjeta);
+    border: 1px solid var(--borde-claro);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(62, 39, 35, 0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tablero-trello article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(62, 39, 35, 0.08);
+}
+
+.tablero-trello article h3 {
+    font-size: 15px;
+    color: var(--texto-marron);
+}
+
+.tablero-trello article p {
+    font-size: 13px;
+    color: var(--texto-marron);
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.btn-eliminar {
+    font-family: var(--fuente-cuerpo);
+    background-color: var(--terracota);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: background-color 0.3s;
+}
+
+.btn-eliminar:hover {
+    background-color: var(--terracota-hover);
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .tablero-trello {
+        flex-direction: column;
+    }
+    #formulario-tarea {
+        grid-template-columns: 1fr;
+    }
 }

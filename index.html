@@ -1,43 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planificador de Tareas Ágil</title>
+    <title>Pet Task Planner</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Barra de navegación principal -->
     <nav>
-        <h1>Mi Planificador Ágil</h1>
+        <h1>My Pet Task Planner 🐾</h1>
     </nav>
 
     <main>
-        <!-- 1. SECCIÓN DEL FORMULARIO -->
+        <section class="seccion-intro">
+            <h2>¡Bienvenido a la web Pet Task Planner!</h2>
+            <p>Mantener al día las necesidades de tu mascota (vacunas, paseos, comida) ahora es muy fácil.</p>
+            <ol>
+                <li><strong>Planifica:</strong> Llena el formulario con la actividad requerida.</li>
+                <li><strong>Categoriza:</strong> Asigna si es un tema médico, de higiene, etc.</li>
+                <li><strong>Gestiona:</strong> Revisa y completa las tarjetas en tu tablero visual.</li>
+            </ol>
+        </section>
+
+        
         <section class="seccion-formulario">
             <h2>Crear Nueva Tarea</h2>
             <form id="formulario-tarea">
                 <div>
                     <label for="nombre">Nombre de la tarea:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Crear base de datos" required>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Comprar alimento o galletas..."
+                        required>
                 </div>
                 <div>
                     <label for="descripcion">Descripción:</label>
-                    <textarea id="descripcion" name="descripcion" rows="3" placeholder="Detalles..." required></textarea>
+                    <textarea id="descripcion" name="descripcion" rows="3"
+                        placeholder="Detalles de la cita o producto..." required></textarea>
                 </div>
                 <div>
-                    <label for="asignado">Asignado a (Responsable):</label>
-                    <input type="text" id="asignado" name="asignado" placeholder="Nombre" required>
+                    <label for="asignado">Asignado a:</label>
+                    <input type="text" id="asignado" name="asignado" placeholder="Ej. Juan Pérez" required>
                 </div>
+
+                
                 <div>
-                    <label for="fecha">Fecha de cumplimiento:</label>
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" name="categoria">
+                        <option value="Medico">🩺 Control Médico</option>
+                        <option value="Medico">💊 Medicinas</option>
+                        <option value="Alimentacion">🥩 Alimentación</option>
+                        <option value="Paseo">🦮 Paseos / Rutina</option>
+                        <option value="Higiene">🛁 Higiene</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="fecha">Fecha límite:</label>
                     <input type="date" id="fecha" name="fecha" required>
                 </div>
                 <div>
                     <label for="estado">Estado:</label>
-                    <select id="estado" name="estado">
-                        <option value="planificacion">En planificación</option>
-                        <option value="proceso">En proceso</option>
-                        <option value="terminado">Terminado</option>
+                    <select id="estado" name="estado" required>
+                        <option value="">Selecciona un estado</option>
+                        <option value="POR HACER">En planificación</option>
+                        <option value="EN PROCESO">En proceso</option>
+                        <option value="HECHO">Terminado</option>
                     </select>
                 </div>
                 <div>
@@ -52,32 +80,23 @@
             </form>
         </section>
 
-        <hr> <!-- Separador temporal -->
+        <hr>
 
-        <!-- 2. SECCIÓN DEL TABLERO KANBAN (Estilo Trello) -->
+        <!-- 2. SECCIÓN DEL TABLERO KANBAN -->
         <section class="tablero-trello">
-            
-            <!-- Columna 1 -->
             <article class="columna" id="col-planificacion">
                 <h2>En Planificación</h2>
-                <!-- Las tareas en planificación se insertarán aquí -->
             </article>
-
-            <!-- Columna 2 -->
             <article class="columna" id="col-proceso">
                 <h2>En Proceso</h2>
-                <!-- Las tareas en proceso se insertarán aquí -->
             </article>
-
-            <!-- Columna 3 -->
             <article class="columna" id="col-terminado">
                 <h2>Terminado</h2>
-                <!-- Las tareas terminadas se insertarán aquí -->
             </article>
-
         </section>
     </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
