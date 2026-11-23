@@ -27,7 +27,8 @@
         
         <section class="seccion-formulario">
             <h2>Crear Nueva Tarea</h2>
-            <form id="formulario-tarea">
+            <!-- JavaScript muestra los mensajes de validación de todos los campos. -->
+            <form id="formulario-tarea" novalidate>
                 <div>
                     <label for="nombre">Nombre de la tarea:</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ej. Comprar alimento o galletas..."
@@ -47,8 +48,9 @@
                 <div>
                     <label for="categoria">Categoría:</label>
                     <select id="categoria" name="categoria">
+                        <!-- Cada categoría tiene un valor distinto para mostrar su etiqueta en la tarjeta. -->
                         <option value="Medico">🩺 Control Médico</option>
-                        <option value="Medico">💊 Medicinas</option>
+                        <option value="Medicinas">💊 Medicinas</option>
                         <option value="Alimentacion">🥩 Alimentación</option>
                         <option value="Paseo">🦮 Paseos / Rutina</option>
                         <option value="Higiene">🛁 Higiene</option>
@@ -65,6 +67,8 @@
                         <option value="">Selecciona un estado</option>
                         <option value="POR HACER">En planificación</option>
                         <option value="EN PROCESO">En proceso</option>
+                        <!-- Revisión se puede elegir al crear o actualizar una tarea. -->
+                        <option value="REVISIÓN">En revisión</option>
                         <option value="HECHO">Terminado</option>
                     </select>
                 </div>
@@ -82,13 +86,18 @@
 
         <hr>
 
-        <!-- 2. SECCIÓN DEL TABLERO KANBAN -->
+        <!-- El resumen informa cuántas tareas hay en el tablero. -->
+        <p id="resumen-tareas" role="status"></p>
         <section class="tablero-trello">
             <article class="columna" id="col-planificacion">
                 <h2>En Planificación</h2>
             </article>
             <article class="columna" id="col-proceso">
                 <h2>En Proceso</h2>
+            </article>
+            <!-- Las tareas en revisión tienen su propia columna. -->
+            <article class="columna" id="col-revision">
+                <h2>En Revisión</h2>
             </article>
             <article class="columna" id="col-terminado">
                 <h2>Terminado</h2>

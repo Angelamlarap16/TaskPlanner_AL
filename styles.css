@@ -140,8 +140,33 @@ hr {
     align-items: flex-start;
 }
 
+/* La etiqueta conserva el color de prioridad y ocupa solo su ancho de texto. */
+.prioridad-tarea {
+    align-self: flex-start;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Los controles de las tarjetas caben dentro de cada columna. */
+.columna article label {
+    display: grid;
+    gap: 4px;
+}
+
+.columna article input,
+.columna article select {
+    width: 100%;
+    min-width: 0;
+}
+
 .columna {
     flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
     background-color: var(--bg-tarjeta);
     border-radius: 12px;
     padding: 20px;
@@ -164,7 +189,8 @@ hr {
 #col-proceso h2 { color: var(--terracota); }
 #col-terminado h2 { color: var(--verde-salvia); }
 
-.tablero-trello article {
+/* Estos estilos se aplican a las tarjetas, dentro de cada columna. */
+.columna > article {
     background-color: var(--bg-tarjeta);
     border: 1px solid var(--borde-claro);
     border-radius: 8px;
@@ -176,17 +202,17 @@ hr {
     gap: 6px;
 }
 
-.tablero-trello article:hover {
+.columna > article:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(62, 39, 35, 0.08);
 }
 
-.tablero-trello article h3 {
+.columna > article h3 {
     font-size: 15px;
     color: var(--texto-marron);
 }
 
-.tablero-trello article p {
+.columna > article p {
     font-size: 13px;
     color: var(--texto-marron);
     opacity: 0.9;
@@ -215,6 +241,10 @@ hr {
 @media (max-width: 768px) {
     .tablero-trello {
         flex-direction: column;
+    }
+    /* Las cuatro columnas ocupan el ancho disponible en pantallas pequeñas. */
+    .columna {
+        width: 100%;
     }
     #formulario-tarea {
         grid-template-columns: 1fr;
