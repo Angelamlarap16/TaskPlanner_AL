@@ -6,6 +6,11 @@ const columnasPorEstado = new Map([
     ['HECHO', 'col-terminado']
 ]);
 
+const clavesStorage = {
+    tareas: 'petTaskPlanner.tasks',
+    currentId: 'petTaskPlanner.currentId'
+};
+
 // La creación y la reasignación aplican la misma regla al responsable.
 function validarResponsable(asignadoA) {
     return typeof asignadoA === 'string' && asignadoA.trim().length > 8;
@@ -31,6 +36,33 @@ class TaskManager {
         return this.tasks.find(task => task.id === taskId);
     }
 
+    // T8 - P1 - se guardan las tareas y el siguiente ID en localStorage.
+    save() {
+        localStorage.setItem(clavesStorage.tareas, JSON.stringify(this.tasks));
+        localStorage.setItem(clavesStorage.currentId, String(this.currentId));
+    }
+
+    // T8 - P3 - se recuperan las tareas y el siguiente ID desde localStorage.
+    load() {
+        const tareasGuardadas = localStorage.getItem(clavesStorage.tareas);
+        const idGuardado = localStorage.getItem(clavesStorage.currentId);
+
+        if (tareasGuardadas) {
+            try {
+                const tareasRecuperadas = JSON.parse(tareasGuardadas);
+                if (Array.isArray(tareasRecuperadas)) this.tasks = tareasRecuperadas;
+            } catch {
+                this.tasks = [];
+            }
+        }
+
+        const mayorId = this.tasks.reduce((mayor, task) => Math.max(mayor, Number(task.id) || 0), 0);
+        const siguienteIdGuardado = Number(idGuardado);
+        this.currentId = Number.isInteger(siguienteIdGuardado) && siguienteIdGuardado > mayorId
+            ? siguienteIdGuardado
+            : mayorId + 1;
+    }
+
     addTask(task) {
         // Un estado desconocido no puede quedar guardado sin una columna.
         if (!columnasPorEstado.has(task.estado)) {
@@ -38,11 +70,14 @@ class TaskManager {
         }
         task.id = this.currentId++;
         this.tasks.push(task);
+        // T8 - P2 - se guarda cada cambio realizado en las tareas.
+        this.save();
         return task;
     }
 
     deleteTask(taskId) {
         this.tasks = this.tasks.filter(task => task.id !== taskId);
+        this.save();
     }
 
     updateTask(taskId, status) {
@@ -51,6 +86,7 @@ class TaskManager {
         if (!task || !columnasPorEstado.has(status)) return false;
 
         task.estado = status;
+        this.save();
         return true;
     }
 
@@ -60,6 +96,7 @@ class TaskManager {
         if (!task || !validarResponsable(assignee)) return false;
 
         task.asignadoA = assignee.trim();
+        this.save();
         return true;
     }
 }
@@ -93,6 +130,8 @@ function validateTaskForm(nombre, descripcion, asignadoA, fechaDeEntrega, estado
 }
 
 const taskManager = new TaskManager();
+// T8 - P4 - se cargan las tareas antes de dibujar el tablero.
+taskManager.load();
 const formulario = document.getElementById('formulario-tarea');
 const resumenTareas = document.getElementById('resumen-tareas');
 const tablero = document.querySelector('.tablero-trello');
